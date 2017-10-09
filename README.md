@@ -6,19 +6,38 @@ Tips and guidelines for scalable and easily maintainable code bases!
 
 ## Summary
 
+- [Recommended libraries](#recommended-libraries)
+  - [Ramda](#ramda)
+  - [Ramda Fantasy](#ramda-fantasy)
 - [Do](#do)
   - [Return everything](#return-everything)
+  - [Tacit programming](#tacit-programming)
   - [Use modules](#use-modules)
   - [Composition over inheritance](#composition-over-inheritance)
 - [Avoid](#avoid)
   - [Mutability](#mutability)
   - [Loops](#loops)
+  - [Switch](#switch)
   - [Try](#try)
   - [Classes](#classes)
+  - [Callbacks](#callbacks)
 - [Advantages](#advantages)
   - [Optimization](#optimization)
   - [Testing](#testing)
   - [Scalability](#scalability)
+
+## Recommended libraries
+
+### Ramda
+
+Ramda is like Lodash made right. It has a lot of functions to work with data
+and to work with composition. Unlike Lodash, in Ramda, functions come before
+data.
+
+### Ramda Fantasy
+
+Ramda Fantasy is a set of common monadic structures to work with values, errors,
+side-effects and state.
 
 ## Do
 
@@ -26,6 +45,12 @@ Tips and guidelines for scalable and easily maintainable code bases!
 
 Everything should return, also functions that emit side-effects. Try to preserve
 homomorphism. Try to keep the return type of a function consistent.
+
+### Tacit programming
+
+Tacit programming is also known as point-free programming. It means, basically, using
+simple functions to compose more complexes functions (and omitting arguments). One of
+the functional programming pillars is composition.
 
 ### Use modules
 
@@ -57,6 +82,11 @@ Native statement loops are forbidden. Loops are made to enforce side-effects and
 case of a loop where a side-effect wouldn't be expected. You don't need to use recursion most of
 the time. There is a lot of functions and compositions that you can use to achieve your logic.
 
+### Switch
+
+In functional programming, imperative structures do not exist. `switch` is intended to have
+effects and known to have a complex flux.
+
 ### Try
 
 Error handling shouldn't be handled by exceptions, but by either monads or promises.
@@ -65,6 +95,12 @@ Error handling shouldn't be handled by exceptions, but by either monads or promi
 
 In general, using classes enforce effects and directly mutability. You can replace them by literal
 objects and functions that work on these objects.
+
+### Callbacks
+
+Callbacks can guide you easily to _Hadouken_ code. Promises or _futures_ are the way to go here.
+If you are using a library that uses callbacks, you can _promisify_ the function to transform the
+callback to a promise.
 
 ## Advantages
 
