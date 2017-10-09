@@ -1,2 +1,7 @@
-# js-real-world-functional-programming
-Tips and guidelines for real world functional code-bases in JS
+# Real world functional programming in JS
+
+Tips and guidelines for scalable and easily maintanable code bases!
+
+![](https://raw.github.com/fantasyland/fantasy-land/master/logo.png)
+
+## Summary
