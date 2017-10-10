@@ -318,7 +318,7 @@ be caught in compile-time. You should replace them by monads, like the `Maybe` m
 #### Don't
 
 ```js
-const safeDif = (a, b) => {
+const safeDiv = (a, b) => {
     if (b === 0) {
         return undefined
     }
