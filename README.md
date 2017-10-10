@@ -48,14 +48,20 @@ they are being used daily by us to deliver high quality code.
 
 ### Ramda
 
-[Ramda](https://github.com/ramda/ramda) is like Lodash made right. It has a lot
+[Ramda](https://github.com/ramda/ramda) is like Lodash, but made right. It has a lot
 of functions to work with data and to work with composition. Unlike Lodash, in
-Ramda, functions come before data.
+Ramda, functions come before data. This allows point-free programming (like Haskell).
 
 ### Ramda Fantasy
 
 [Ramda Fantasy](https://github.com/ramda/ramda-fantasy) is a set of common monadic
 structures to work with values, errors, side-effects and state.
+
+## Folktale
+
+[Folktale](http://folktale.origamitower.com/) is an alternative to Ramda Fantasy. It
+is better maintained and exports tools for working with concurrency, computations that
+may fail and modelling data using algebraic data types.
 
 ## Do
 
