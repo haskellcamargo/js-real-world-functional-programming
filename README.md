@@ -271,7 +271,7 @@ console.log(safeDiv(20, 0) + 10) // Ops
 
 #### Do
 
-```
+```js
 import { Maybe } from 'ramda-fantasy'
 
 const safeDiv = (a, b) => 0 === b
