@@ -76,6 +76,35 @@ parameter and are error-prone.
 Code outside a function is a side-effect inside a module. Effects should be explicit. Only
 static declarations are allowed.
 
+#### Don't
+
+- `user.js`
+```js
+const usersList = User.find().asArray()
+
+usersList.forEach(user => {
+    console.log(user.name)
+})
+```
+
+#### Do
+
+- `user.js`
+```js
+const listUsers = () => User.find().asArray()
+
+const printNames = () => listUsers().forEach(user => {
+    console.log(user.name)
+})
+```
+
+- `index.js`
+```js
+import { printNames } from './user'
+
+printNames()
+```
+
 ### Loops
 
 Native statement loops are forbidden. Loops are made to enforce side-effects and there is no
