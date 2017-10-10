@@ -44,7 +44,31 @@ side-effects and state.
 ### Return everything
 
 Everything should return, also functions that emit side-effects. Try to preserve
-homomorphism. Try to keep the return type of a function consistent.
+homomorphism. Try to keep the return type of a function consistent. Don't mix
+computations that transform data with things like writing to screen. Modular code
+is easier to maintain. Use parameters for replaceable data instead of hard-coding.
+
+#### Don't
+
+```js
+let result = 1;
+for (let i = 2; i <= 5; i++) {
+    result *= i;
+}
+
+console.log('Fact of 5: ', result);
+```
+
+#### Do
+
+```js
+const fact(n) = n === 0
+    ? 1
+    : n * fact(n - 1);
+
+console.log('Fact of 5: ', fact(5));
+```
+
 
 ### Tacit programming
 
@@ -93,7 +117,7 @@ usersList.forEach(user => {
 ```js
 const listUsers = () => User.find().asArray()
 
-const printNames = () => listUsers().forEach(user => {
+export const printNames = () => listUsers().forEach(user => {
     console.log(user.name)
 })
 ```
