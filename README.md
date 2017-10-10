@@ -87,7 +87,7 @@ console.log('Fact of 5: ', result)
 #### Do
 
 ```js
-const fact(n) = n === 0
+const fact = n => n === 0
     ? 1
     : n * fact(n - 1)
 
