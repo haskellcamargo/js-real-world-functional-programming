@@ -19,6 +19,7 @@ Tips and guidelines for scalable and easily maintainable code bases!
   - [Loops](#loops)
   - [Switch](#switch)
   - [Try](#try)
+  - [Undefined and null](#undefined-and-null)
   - [Classes](#classes)
   - [Callbacks](#callbacks)
 - [Advantages](#advantages)
@@ -211,8 +212,8 @@ console.log(result) // Wesley likes farting
 import { T, cond, propEq } from 'ramda'
 
 const getDescription = cond([
-    [propEq('name', 'Dayana'), ({ name }) => `${name} is cool!'],
-    [propEq('name', 'Wesley'), ({ name }) => `${name} likes farting'],
+    [propEq('name', 'Dayana'), ({ name }) => `${name} is cool!`],
+    [propEq('name', 'Wesley'), ({ name }) => `${name} likes farting`],
     [T, ({ name }) => `Who is ${name}?`]
 ])
 
@@ -248,16 +249,97 @@ const computation = tryCatch(
 console.log(computation()) // Left<TypeError>
 ```
 
+### Undefined and null
+
+Here lies the root of _undefined is not a function_. Missing values lead to over-engineering,
+lots of verifications and conditions and errors that break your application and cannot
+be caught in compile-time. You should replace them by monads, like the `Maybe` monad.
+
+#### Don't
+
+```js
+const saveDif = (a, b) => {
+    if (b === 0) {
+        return undefined
+    }
+
+    return a / b
+}
+
+console.log(safeDiv(20, 0) + 10) // Ops
+```
+
+#### Do
+
+```
+import { Maybe } from 'ramda-fantasy'
+
+const safeDiv = (a, b) => 0 === b
+    ? Maybe.Nothing
+    : Maybe.Just(a / b)
+
+safeDiv(20, 0).chain(result => {
+    console.log(result + 10) // Never falls here
+})
+```
+
 ### Classes
 
 In general, using classes enforce effects and directly mutability. You can replace them by literal
 objects and functions that work on these objects.
+
+#### Don't
+
+```js
+class Person {
+    setName(name) { this.name = name }
+    getName() { return this.name }
+}
+
+let person = new Person()
+person.setName('Cassandra')
+```
+
+#### Do
+
+```js
+import { lensProp, prop, set } from 'ramda'
+
+const setName = set(lensProp('name'))
+const getName = prop('name')
+
+const person = setName('Cassandra', {})
+```
 
 ### Callbacks
 
 Callbacks can guide you easily to _Hadouken_ code. Promises or _futures_ are the way to go here.
 If you are using a library that uses callbacks, you can _promisify_ the function to transform the
 callback to a promise.
+
+#### Don't
+
+```js
+$.ajax('http://api.trello.com/me', me => {
+    $.ajax(`http://api.trello.com/tasks/${me.id}`, tasks => {
+        var finished = []
+        for (var i = 0; i < tasks.length; i++) {
+            if (tasks[i].done) {
+                finished.push(tasks[i])
+            }
+        }
+    })
+})
+```
+
+#### Do
+
+```js
+fetch('http://api.trello.com/me')
+    .then(({ id }) => `http://api.trello.com/tasks/${id}`)
+    .filter(prop('done'))
+    .tap(console.log)
+```
 
 ## Advantages
 
