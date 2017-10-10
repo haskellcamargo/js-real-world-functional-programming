@@ -95,6 +95,24 @@ object is therefore forbidden. Don't use neither `var` nor `let`. Everything sho
 Don't use functions like `.push` or `.splice` because they change the value of the original
 parameter and are error-prone.
 
+#### Don't
+
+```js
+var approved = []
+
+for (var i = 0; i < approved.length; i++) {
+    if (users[i].score >= 7) {
+        approved.push(approved)
+    }
+}
+```
+
+#### Do
+
+```js
+const approved = filter(user => user.score >= 7, users)
+```
+
 ### Bare code
 
 Code outside a function is a side-effect inside a module. Effects should be explicit. Only
@@ -204,6 +222,31 @@ console.log(getDescription({ name: 'Wesley' })) // Wesley likes farting
 ### Try
 
 Error handling shouldn't be handled by exceptions, but by either monads or promises.
+
+#### Don't
+
+```js
+try {
+    undefined.property
+} catch (err) {
+    console.log(err)
+}
+```
+
+#### Do
+
+```js
+import { tryCatch } from 'ramda'
+import { Either } from 'ramda-fantasy'
+
+const computation = tryCatch(
+    () => undefined.property,
+    Either.Right,
+    Either.Left
+)
+
+console.log(computation()) // Left<TypeError>
+```
 
 ### Classes
 
