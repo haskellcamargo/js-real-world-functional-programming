@@ -14,6 +14,7 @@ Tips and guidelines for scalable and easily maintainable code bases!
   - [Tacit programming](#tacit-programming)
   - [Use modules](#use-modules)
   - [Composition over inheritance](#composition-over-inheritance)
+  - [Memoize functions](#memoize-functions)
 - [Avoid](#avoid)
   - [Mutability](#mutability)
   - [Loops](#loops)
@@ -26,6 +27,10 @@ Tips and guidelines for scalable and easily maintainable code bases!
   - [Optimization](#optimization)
   - [Testing](#testing)
   - [Scalability](#scalability)
+- [Learning resources](#learning-resources)
+  - [Motivational articles](#motivational-articles)
+  - [For beginners](#for-beginners)
+  - [Babel plugins](#babel-plugins)
 
 ## Recommended libraries
 
@@ -102,6 +107,23 @@ should export functions and, when using a type checker, types.
 
 Inheritance is definitely **not** how you deal with data and behavior in functional programming.
 Computations are modeled using behaviors. Some languages call them type classes.
+
+### Memoize functions
+
+Memoize pure functions that are used several times with the same input parameters. Ramda provides
+a function called `memoize` for that!
+
+#### Do
+
+```js
+const fact = memoize(n => 0 === n
+    ? 1
+    : n * fact(n - 1))
+
+fact(5); // Calculates fact for 5, 4, 3 ...
+fact(5); // Instantaneous
+fact(3); // Instantaneous
+```
 
 ## Avoid
 
@@ -376,3 +398,19 @@ Functional code is easier to scale. Having, for example, a stateless server will
 have multiple instances of it in different machines without worrying with shared and dependent
 data. Running on clusters and multiple processors is possible and V8 can optimize to run
 pure computations on different processes.
+
+# Learning resources
+
+## Motivational articles
+
+- [Functional Programming should be your #1 priority](https://medium.com/@jugoncalves/functional-programming-should-be-your-1-priority-for-2015-47dd4641d6b9)
+
+## For beginners
+
+- [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
+
+## Babel plugins
+
+- [Function composition](https://github.com/haskellcamargo/babel-plugin-function-composition)
+- [Implicit function](https://github.com/haskellcamargo/babel-plugin-implicit-function)
+- [Pipe operator](https://github.com/Swizz/babel-plugin-pipe-operator-curry)
