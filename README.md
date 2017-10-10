@@ -31,14 +31,14 @@ Tips and guidelines for scalable and easily maintainable code bases!
 
 ### Ramda
 
-Ramda is like Lodash made right. It has a lot of functions to work with data
-and to work with composition. Unlike Lodash, in Ramda, functions come before
-data.
+[Ramda](https://github.com/ramda/ramda) is like Lodash made right. It has a lot
+of functions to work with data and to work with composition. Unlike Lodash, in
+Ramda, functions come before data.
 
 ### Ramda Fantasy
 
-Ramda Fantasy is a set of common monadic structures to work with values, errors,
-side-effects and state.
+[Ramda Fantasy](https://github.com/ramda/ramda-fantasy) is a set of common monadic
+structures to work with values, errors, side-effects and state.
 
 ## Do
 
