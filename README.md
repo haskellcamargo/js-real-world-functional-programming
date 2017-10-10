@@ -32,6 +32,18 @@ Tips and guidelines for scalable and easily maintainable code bases!
   - [For beginners](#for-beginners)
   - [Babel plugins](#babel-plugins)
 
+Functional programming in JavaScript in 2017 is finally a **DO**. Most of the
+new tools for this environment are based on functional concepts and it seems
+like functional programming is becoming more and more popular due to its
+advantages. On [Rung](https://developers.rung.com.br/), functional programming
+is the main mindset for all projects and subprojects and it scales really well.
+We have been using functional programming deeply in the last 2 years, from
+JS up to Haskell. Bugs got less frequent and easier to track and fix, and,
+different from what you may think, our team got it **really fast**! Keeping
+the code standard and working with several people without worrying with
+ones breaking each other code is now a relief! The tips below are not empiric,
+they are being used daily by us to deliver high quality code.
+
 ## Recommended libraries
 
 ### Ramda
