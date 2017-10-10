@@ -77,6 +77,22 @@ Tacit programming is also known as point-free programming. It means, basically, 
 simple functions to compose more complexes functions (and omitting arguments). One of
 the functional programming pillars is composition.
 
+### Don't
+
+```js
+console.log(
+    sum(map(x => x + 1, range(0, 100)))
+)
+```
+
+### Do
+
+```js
+const transform = pipe(map(inc), sum))
+
+console.log(transform(range(0, 100)))
+```
+
 ### Use modules
 
 Isolate your logic inside modules that do one thing, and do that well. Modules
