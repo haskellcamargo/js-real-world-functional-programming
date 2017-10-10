@@ -134,11 +134,72 @@ printNames()
 Native statement loops are forbidden. Loops are made to enforce side-effects and there is no
 case of a loop where a side-effect wouldn't be expected. You don't need to use recursion most of
 the time. There is a lot of functions and compositions that you can use to achieve your logic.
+Ramda provides some functions like `map`, `filter` and `reduce` that make loops completely
+unnecessary.
+
+#### Don't
+
+```js
+const even = [];
+for (let i = 0; i <= 300; i++) {
+    if (i % 2 === 0) {
+        even.push(i)
+    }
+}
+
+console.log(even) // [0, 2, 4, 6, 8 ...]
+```
+
+#### Do
+
+```js
+import { filter, range } from 'ramda'
+
+const even = filter(n => n % 2 === 0)
+
+console.log(even(range(0, 300))) // [0, 2, 4, 6, 8 ...]
+```
 
 ### Switch
 
 In functional programming, imperative structures do not exist. `switch` is intended to have
-effects and known to have a complex flux.
+effects and known to have a complex flux. You can use the function `cond` from Ramda instead.
+`cond` receives a list of pairs of functions where the first one is the predicate and the
+second is the transformation.
+
+#### Don't
+
+```js
+const person = { name: 'Wesley' }
+let result;
+
+switch (person.name) {
+    case 'Dayana':
+        result = person.name + ' is cool!'
+        break
+    case 'Wesley':
+        result = person.name + ' likes farting'
+        break
+    default:
+        result = 'Who is ' + person.name + '?'
+}
+
+console.log(result) // Wesley likes farting
+```
+
+### Do
+
+```js
+import { T, cond, propEq } from 'ramda'
+
+const getDescription = cond([
+    [propEq('name', 'Dayana'), ({ name }) => `${name} is cool!'],
+    [propEq('name', 'Wesley'), ({ name }) => `${name} likes farting'],
+    [T, ({ name }) => `Who is ${name}?`]
+])
+
+console.log(getDescription({ name: 'Wesley' })) // Wesley likes farting
+```
 
 ### Try
 
