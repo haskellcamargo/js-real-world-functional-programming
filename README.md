@@ -76,12 +76,12 @@ is easier to maintain. Use parameters for replaceable data instead of hard-codin
 #### Don't
 
 ```js
-let result = 1;
+let result = 1
 for (let i = 2; i <= 5; i++) {
-    result *= i;
+    result *= i
 }
 
-console.log('Fact of 5: ', result);
+console.log('Fact of 5: ', result)
 ```
 
 #### Do
@@ -89,9 +89,9 @@ console.log('Fact of 5: ', result);
 ```js
 const fact(n) = n === 0
     ? 1
-    : n * fact(n - 1);
+    : n * fact(n - 1)
 
-console.log('Fact of 5: ', fact(5));
+console.log('Fact of 5: ', fact(5))
 ```
 
 
@@ -139,9 +139,9 @@ const fact = memoize(n => 0 === n
     ? 1
     : n * fact(n - 1))
 
-fact(5); // Calculates fact for 5, 4, 3 ...
-fact(5); // Instantaneous
-fact(3); // Instantaneous
+fact(5) // Calculates fact for 5, 4, 3 ...
+fact(5) // Instantaneous
+fact(3) // Instantaneous
 ```
 
 ## Avoid
@@ -219,7 +219,7 @@ unnecessary.
 #### Don't
 
 ```js
-const even = [];
+const even = []
 for (let i = 0; i <= 300; i++) {
     if (i % 2 === 0) {
         even.push(i)
@@ -250,7 +250,7 @@ second is the transformation.
 
 ```js
 const person = { name: 'Wesley' }
-let result;
+let result
 
 switch (person.name) {
     case 'Dayana':
