@@ -23,6 +23,7 @@ Tips and guidelines for scalable and easily maintainable code bases!
   - [Undefined and null](#undefined-and-null)
   - [Classes](#classes)
   - [Callbacks](#callbacks)
+  - [Prototype extension](#prototype-extension)
 - [Advantages](#advantages)
   - [Optimization](#optimization)
   - [Testing](#testing)
@@ -146,6 +147,9 @@ fact(3); // Instantaneous
 ## Avoid
 
 ### Mutability
+
+> Mutability is evil! It can set your house on fire, kill your cat and buy costumes on e-bay
+> using your credit card! Be careful!
 
 Functional programming heavily relies on immutability. Redefining a value or the property of an
 object is therefore forbidden. Don't use neither `var` nor `let`. Everything should be a `const`.
@@ -396,6 +400,12 @@ fetch('http://api.trello.com/me')
     .filter(prop('done'))
     .tap(console.log)
 ```
+
+### Prototype extension
+
+Doing something like `String.prototype.x =` is like a virus! It spreads all over your code and
+infects every piece, possibly causing unexpected behavior. Prefer isolating these behaviors in
+functions.
 
 ## Advantages
 
