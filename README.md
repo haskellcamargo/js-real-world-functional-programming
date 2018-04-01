@@ -396,7 +396,7 @@ $.ajax('http://api.trello.com/me', me => {
 
 ```js
 fetch('http://api.trello.com/me')
-    .then(({ id }) => `http://api.trello.com/tasks/${id}`)
+    .then(({ id }) => fetch(`http://api.trello.com/tasks/${id}`))
     .filter(prop('done'))
     .tap(console.log)
 ```
